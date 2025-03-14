@@ -12,60 +12,15 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: Install YARN 
-        run: yarn install
-
-      - name: Build through YARN 
-        run: yarn build
-      
-      - name: Lint through YARN
-        run: yarn lint
-          
-      - name: Switch to MJML-Parser-XML
-        run: cd packages/mjml-parser-xml
-      
-      - name: Install YARN in MJML-Parser-XML
-        run: yarn install
-      
-      - name: Test MJML-Parser-XML debug mode through YARN
-        run: yarn test --debug
-      
-      - name: Switch to MJML-Core
-        run: cd ../../packages/mjml-core
-      
-      - name: Test MJML-Core debug mode through YARN 
-        run: yarn test --debug
-      
-      - name: Switch to MJML main package
-        run: cd ../../packages/mjml
-
-      - name: Test the main package through YARN
-        run: yarn test
-
-
-
-      - name: Build Windows Executable
-        run:
-          pkg -t node18-win-x64 packages/mjml/bin/mjml -o build/windows/mjml.exe
-      - name: Build Linux Executable
-        run:
-          pkg -t node18-linux-x64 packages/mjml/bin/mjml -o build/linux/mjml
-      - name: Build macOS Executable
-        run:
-          pkg -t node18-macos-x64 packages/mjml/bin/mjml -o build/macos/mjml
-
-      - name: Upload Linux Executable
-        uses: actions/upload-artifact@v4
-        with:
-          path: build/linux/mjml
-
-      - name: Upload Windows Executable
-        uses: actions/upload-artifact@v4
-        with:
-          path: build/windows/mjml.exe
-      
-      - name: Upload macOS Executable
-        uses: actions/upload-artifact@v4
-        with:
-          path: build/macos/mjml
+      - name: Run linting & tests
+        run:  |
+          yarn install
+          yarn build
+          yarn lint
+          cd packages/mjml-parser-xml
+          yarn install
+          yarn test --debug
+          cd ../../packages/mjml-core
+          yarn test --debug
+          cd ../../packages/mjml
+          yarn test
