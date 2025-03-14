@@ -24,3 +24,28 @@ jobs:
           yarn test --debug
           cd ../../packages/mjml
           yarn test
+
+      - name: Build Windows Executable
+        run:
+          pkg -t node18-win-x64 packages/mjml/bin/mjml -o build/windows/mjml.exe
+      - name: Build Linux Executable
+        run:
+          pkg -t node18-linux-x64 packages/mjml/bin/mjml -o build/linux/mjml
+      - name: Build macOS Executable
+        run:
+          pkg -t node18-macos-x64 packages/mjml/bin/mjml -o build/macos/mjml
+
+      - name: Upload Linux Executable
+        uses: actions/upload-artifact@v4
+        with:
+          path: build/linux/mjml
+
+      - name: Upload Windows Executable
+        uses: actions/upload-artifact@v4
+        with:
+          path: build/windows/mjml.exe
+      
+      - name: Upload macOS Executable
+        uses: actions/upload-artifact@v4
+        with:
+          path: build/macos/mjml
