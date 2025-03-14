@@ -17,6 +17,7 @@ jobs:
           yarn install
           yarn build
           yarn lint
+          yarn add pkg -W
           cd packages/mjml-parser-xml
           yarn install
           yarn test --debug
@@ -26,5 +27,6 @@ jobs:
           yarn test
       
       - name: Test Linux Executable
-        run:
-          pkg -t node18-linux-x64 packages/mjml/bin/mjml -o build/linux/mjml
+        run: |
+          mkdir -p ../../build/linux
+          pkg -t node18-linux-x64 ./bin/mjml -o ../../build/linux/mjml
