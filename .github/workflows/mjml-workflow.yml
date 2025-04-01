@@ -27,7 +27,7 @@ jobs:
       
       - name: Test Linux Executable
         run: |
-          yarn global add pkg
+          yarn global add pkg@5.8.1
           mkdir -p ./build/linux
           pkg -t node18-linux-x64 ./packages/mjml/bin/mjml  -o ./build/linux/mjml
 
