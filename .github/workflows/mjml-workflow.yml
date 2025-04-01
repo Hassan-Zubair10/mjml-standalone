@@ -36,24 +36,4 @@ jobs:
         with:
           path: ./build/linux/mjml
 
-      - name: Test Windows Executable
-        run: |
-          yarn global add pkg
-          mkdir -p ./build/linux
-          pkg -t node18-win-x64 ./packages/mjml/bin/mjml  -o ./build/windows/mjml
-  
-      - name: Upload Windows Executable
-        uses: actions/upload-artifact@v4
-        with:
-          path: ./build/windows/mjml
-
-      - name: Test macOS Executable
-        run: |
-          yarn global add pkg
-          mkdir -p ./build/linux
-          pkg -t node18-macos-x64 ./packages/mjml/bin/mjml  -o ./build/macos/mjml
-    
-      - name: Upload MacOS Executable
-        uses: actions/upload-artifact@v4
-        with:
-          path: ./build/macos/mjml
+      
